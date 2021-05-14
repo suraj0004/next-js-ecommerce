@@ -9,11 +9,8 @@ function ProductCard({ product, addToCart }) {
             <div className="row g-0 p-2">
                 <div className="col-md-4 p-2 border rounded shadow-lg">
                     <img
-                        priority
                         src={product.image}
                         className="img-fluid"
-                        height={250}
-                        width={250}
                     />
                 </div>
                 <div className="col-md-8">

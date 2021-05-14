@@ -13,9 +13,7 @@ function CategoryCard(props) {
             <div className="card bg-dark text-white shadow-lg p-3 mb-5 bg-white rounded category">
                 <img
                     src={category.image}
-                    className="card-img-top"
-                    height={250}
-                    width={250}
+                    className="card-img-top img-fluid"
                 />
                 <div className="card-img-overlay">
                     <h5 className="card-title ">{category.name}</h5>

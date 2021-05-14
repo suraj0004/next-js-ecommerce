@@ -21,7 +21,7 @@ function Home({fetchCategories, categories}) {
         {
           categories.loading
           ? <CategoryLoader />
-          :<CategoryList categories={categories} />
+          :<CategoryList categories={categories.data} />
         }
       </div>
     </>

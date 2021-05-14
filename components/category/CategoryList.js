@@ -1,12 +1,11 @@
 import React from 'react';
 import CategoryCard from './CategoryCard'
 
-function CategoryList(props) {
-    const { categories } = props;
+function CategoryList({ categories }) {
     return (
         <>
             {
-                categories.data.map((category) => {
+                categories.map((category) => {
                     return <div className="col-md-3 ">
                         <CategoryCard category={category} />
                     </div>

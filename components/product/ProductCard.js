@@ -1,7 +1,9 @@
 import React from 'react';
 import { FaPlus } from 'react-icons/fa';
+import { addToCart } from '@/redux/index';
+import { connect } from 'react-redux';
 
-function ProductCard({ product }) {
+function ProductCard({ product, addToCart }) {
     return (
         <div className="card m-3 shadow-lg">
             <div className="row g-0 p-2">
@@ -20,7 +22,7 @@ function ProductCard({ product }) {
                         <p className="card-text">
                             {product.weight}
                         </p>
-                        <button className="btn btn-outline-primary __float-right p-2">Add <FaPlus /> </button>
+                        <button onClick={() => addToCart(product)} className="btn btn-outline-primary __float-right p-2">Add <FaPlus /> </button>
                         <h3 className="card-title ">{product.price}</h3>
                     </div>
                 </div>
@@ -29,4 +31,11 @@ function ProductCard({ product }) {
     );
 }
 
-export default ProductCard;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (product) => dispatch(addToCart(product))
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(ProductCard);

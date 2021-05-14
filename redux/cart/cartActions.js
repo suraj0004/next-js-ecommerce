@@ -1,7 +1,8 @@
 import {
     CART_FETCH_REQUEST,
     CART_FETCH_SUCCESS,
-    CART_FETCH_FAILURE
+    CART_FETCH_FAILURE,
+    UPDATE_CART
 } from "./cartTypes";
 
 export const cartRequest = () => {
@@ -21,6 +22,13 @@ export const cartFailure = (error) => {
     return {
         type: CART_FETCH_FAILURE,
         payload: error
+    }
+}
+
+export const updateCart = (item) => {
+    return {
+        type: UPDATE_CART,
+        payload: item
     }
 }
 
@@ -56,5 +64,19 @@ export const fetchcart = () => {
             dispatch(cartSuccess(dummycart))
         }, 5000);
         console.log("fetching cart");
+    }
+}
+
+export const addToCart = (item) => {
+    return (dispatch) => {
+        // updating data
+        console.log("updating cart");
+        item = {
+            product_id: item.id,
+            quantity: 1,
+            product : item,
+        }
+        dispatch(updateCart(item))
+        
     }
 }

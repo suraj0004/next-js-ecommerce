@@ -1,7 +1,8 @@
 import {
     CART_FETCH_REQUEST,
     CART_FETCH_SUCCESS,
-    CART_FETCH_FAILURE
+    CART_FETCH_FAILURE,
+    UPDATE_CART
 } from './cartTypes';
 
 const initialState = {
@@ -30,6 +31,13 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload,
                 data: [],
+            }
+        case UPDATE_CART:
+            var data = state.data;
+            data.push(action.payload);
+            return {
+                ...state,
+                data: data,
             }
         default:
             return state;

@@ -10,9 +10,10 @@ export const categoryRequest = () => {
     }
 }
 
-export const categorySuccess = () => {
+export const categorySuccess = (data) => {
     return {
-        type: CATEGORY_FETCH_SUCCESS
+        type: CATEGORY_FETCH_SUCCESS,
+        payload: data
     }
 }
 
@@ -23,9 +24,45 @@ export const categoryFailure = (error) => {
     }
 }
 
-export const fetchCategories = (postData, callBackMethod) => {
+export const fetchCategories = () => {
     return (dispatch) => {
         // fetching data
+        dispatch(categoryRequest())
+        setTimeout(() => {
+            const dummyCategories = [
+                {
+                    id: 1,
+                    name : "test 1",
+                    image : "/images/profile.jpg",
+                },
+                {
+                    id: 2,
+                    name : "test 2",
+                    image : "/images/profile.jpg",
+                },
+                {
+                    id: 3,
+                    name : "test 3",
+                    image : "/images/profile.jpg",
+                },
+                {
+                    id: 4,
+                    name : "test 4",
+                    image : "/images/profile.jpg",
+                },
+                {
+                    id: 5,
+                    name : "test 5",
+                    image : "/images/profile.jpg",
+                },
+                {
+                    id: 6,
+                    name : "test 6",
+                    image : "/images/profile.jpg",
+                },
+            ]
+            dispatch(categorySuccess(dummyCategories))
+        }, 5000);
         console.log("fetching categories");
     }
 }

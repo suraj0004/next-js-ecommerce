@@ -31,7 +31,7 @@ export const fetchProducts = ( shop_slug, category_slug) => {
     return (dispatch) => {
         // fetching data
         dispatch(productRequest())
-        axios.get(`http://localhost/shopinventorymanagement/public/api/${shop_slug}/${category_slug}`)
+        axios.get(`http://localhost/shopinventorymanagement/public/api/ecommerce/${shop_slug}/${category_slug}`)
         .then(response => {
             if(response.data.success) {
                 dispatch(productSuccess(response.data.data))

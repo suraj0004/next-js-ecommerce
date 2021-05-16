@@ -30,7 +30,7 @@ export const fetchCategories = (shop_slug) => {
     return (dispatch) => {
 
         dispatch(categoryRequest())
-        axios.get(`http://localhost/shopinventorymanagement/public/api/${shop_slug}`)
+        axios.get(`http://localhost/shopinventorymanagement/public/api/ecommerce/${shop_slug}`)
         .then(response => {
             dispatch(categorySuccess(response.data.data))
         }).catch(error => {

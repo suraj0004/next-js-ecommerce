@@ -3,6 +3,9 @@ import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
 import { fetchcart } from '@/redux/index'
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import CartList from '@/components/cart/CartList'
+import CheckoutDetails from "@/components/cart/checkout/CheckoutDetails"
+
 
 function Cart({ fetchcart, cart }) {
 
@@ -25,7 +28,15 @@ function Cart({ fetchcart, cart }) {
       </div>
       </h3>
       <div className="row pt-200">
-
+        <div className="col-lg-7 p-1 card">
+          <CartList products={[1, 2, 3, 4, 5, 6, 7, 8, 9]} />
+        </div>
+        <div className="col-lg-1">
+          <br/>
+        </div>
+        <div className="col-lg-4 bg-white border">
+         <CheckoutDetails/>
+        </div>
       </div>
     </>
   )

@@ -17,7 +17,7 @@ function ProductCard({ product, addToCart }) {
                     <div className="card-body">
                         <h5 className="card-title">{product.name}</h5>
                         <p className="card-text">
-                            {product.weight}
+                            {product.weight} {product.weight_type}
                         </p>
                         <button onClick={() => addToCart(product)} className="btn btn-outline-primary __float-right p-2">Add <FaPlus /> </button>
                         <h3 className="card-title ">{product.price}</h3>

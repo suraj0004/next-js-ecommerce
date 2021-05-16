@@ -1,3 +1,6 @@
+import axios from "axios";
+import { api_fail_error }  from "@/helpers/constant.js"
+
 import {
     PRODUCT_FETCH_REQUEST,
     PRODUCT_FETCH_SUCCESS,
@@ -24,57 +27,19 @@ export const productFailure = (error) => {
     }
 }
 
-export const fetchProducts = () => {
+export const fetchProducts = ( shop_slug, category_slug) => {
     return (dispatch) => {
         // fetching data
         dispatch(productRequest())
-        setTimeout(() => {
-            const dummyProducts = [
-                {
-                    id: 1,
-                    name: "product 1",
-                    weight: "per 50 gm",
-                    price: "Rs. 100 /- ",
-                    image: "/images/profile.jpg",
-                },
-                {
-                    id: 2,
-                    name: "product 2",
-                    weight: "per 500 gm",
-                    price: "Rs. 1000 /- ",
-                    image: "/images/profile.jpg",
-                },
-                {
-                    id: 3,
-                    name: "product 3",
-                    weight: "per 5 gm",
-                    price: "Rs. 30 /- ",
-                    image: "/images/profile.jpg",
-                },
-                {
-                    id: 4,
-                    name: "product 4",
-                    weight: "per 1 kg",
-                    price: "Rs. 250 /- ",
-                    image: "/images/profile.jpg",
-                },
-                {
-                    id: 5,
-                    name: "product 5",
-                    weight: "per 100 gm",
-                    price: "Rs. 50 /- ",
-                    image: "/images/profile.jpg",
-                },
-                {
-                    id: 6,
-                    name: "product 6",
-                    weight: "per 1.5 kg",
-                    price: "Rs. 150 /- ",
-                    image: "/images/profile.jpg",
-                },
-            ]
-            dispatch(productSuccess(dummyProducts))
-        }, 5000);
-        console.log("fetching proucts");
+        axios.get(`http://localhost/shopinventorymanagement/public/api/${shop_slug}/${category_slug}`)
+        .then(response => {
+            if(response.data.success) {
+                dispatch(productSuccess(response.data.data))
+            }else{
+                dispatch(productFailure(response.data.message))    
+            }
+        }).catch(error => {
+            dispatch(productFailure(api_fail_error))
+        })
     }
 }

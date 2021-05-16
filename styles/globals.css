@@ -9,10 +9,14 @@
 
 .category .card-img-overlay:hover{
   box-shadow: 0 10px 15px 0 rgba(7, 178, 246, 0.2), 0 6px 20px 0 rgba(9, 24, 235, 0.19);
+  background-image: none;
 }
 
-.__float-right{
+.product .add-to-cart-btn{
   float: right;
+  position: absolute;
+  bottom:10px;
+  right: 10px;
 }
 .fixed_header{
   position: fixed;
@@ -52,5 +56,10 @@
   background-image: linear-gradient(to bottom right, rgb(3 3 3 / 100%), rgb(255, 255, 255,0));
   padding: 5px;
   border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.product:hover{
+  box-shadow: 0 10px 15px 0 rgba(7, 178, 246, 0.2), 0 6px 20px 0 rgba(9, 24, 235, 0.19);
+  cursor: pointer;
 }

@@ -48,3 +48,9 @@
   top: -15px;
   right: 10px;
 }
+.category .category_label {
+  background-image: linear-gradient(to bottom right, rgb(3 3 3 / 100%), rgb(255, 255, 255,0));
+  padding: 5px;
+  border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}

@@ -9,7 +9,7 @@ function CategoryCard(props) {
     const { category } = props;
 
     return (
-        <Link href={`${shop_slug}/${category.id}`}>
+        <Link href={`${shop_slug}/${category.slug}`}>
             <div className="card bg-dark text-white shadow-lg p-3 mb-5 bg-white rounded category">
                 <img
                     src={category.image}

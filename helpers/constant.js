@@ -1,0 +1,1 @@
+export const api_fail_error = "Opps something went wrong please try again." 

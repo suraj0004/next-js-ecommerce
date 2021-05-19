@@ -1,14 +1,14 @@
 import React from 'react';
 import CartItem from './CartItem';
 
-function CartList({products}) {
+function CartList({cart}) {
     return (
         <>
             {
-                products.map((product,index) =>{
+                cart.map((item,index) =>{
                     return <>
-                    <CartItem product={product} />
-                    {index == (products.length - 1) ?null:<hr/>}
+                    <CartItem item={item} />
+                    {index == (cart.length - 1) ?null:<hr/>}
                     </>
                 })
             }

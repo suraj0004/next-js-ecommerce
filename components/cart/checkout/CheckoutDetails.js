@@ -5,15 +5,15 @@ import { FaShoppingCart } from 'react-icons/fa';
 function CheckoutDetails(props) {
     return (
         <>
-            <div>
-                <Navbar.Text className="m-2" role="button">
+            <div className="mb-5">
+                {/* <Navbar.Text className="m-2" role="button">
                     <Link href="/cart" className="nav-link" >
                         <FaShoppingCart size="40" />
                     </Link>
                     <span class="badge badge-danger cart_count">{5}</span>
-                </Navbar.Text>
+                </Navbar.Text> */}
 
-                <button className="btn btn-danger float-right btn-sm mt-4 mr-3">Clear Cart</button>
+                {/* <button className="btn btn-danger float-right btn-sm mt-4 mr-3">Clear Cart</button> */}
             </div>
 
             <div className="img-responsive text-center">
@@ -29,18 +29,18 @@ function CheckoutDetails(props) {
             <hr/>
 
            <div className="text-secondary">
-           <div className="row p-2">
+           {/* <div className="row p-2">
                 <div className="col-6 text-left p-0 m-0 ">
                     Product Name xyz abc
                 </div>
                 <div className="col-3 text-center p-0 m-0">
                      
-                     <span class="badge badge-success">3 x 100 Rs</span>
+                     <span class="badge badge-success">10 - 11</span>
                 </div>
                 <div className="col-3 text-right p-0 m-0 font-weight-bold">
                     300 Rs.
                 </div>
-            </div>
+            </div> */}
             
             <div className="row p-2">
                 <div className="col-6 text-left p-0 m-0 ">
@@ -66,7 +66,7 @@ function CheckoutDetails(props) {
            </div>
 
            <div className="row p-2">
-               <button className="btn btn-primary btn-block">Checkout</button>
+               <button className="btn btn-primary btn-block">Procced to Checkout</button>
            </div>
         </>
     );

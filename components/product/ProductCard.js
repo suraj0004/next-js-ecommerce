@@ -5,22 +5,21 @@ import { connect } from 'react-redux';
 
 function ProductCard({ product, addToCart }) {
     return (
-        <div className="card m-3 shadow-lg">
-            <div className="row g-0 p-2">
-                <div className="col-md-4 p-2 border rounded shadow-lg">
+        <div className="card shadow-lg m-0 p-0 m-3 ">
+            <div className="row m-0 p-0 product">
+                <div className="col-md-4 text-center m-0 p-0">
                     <img
                         src={product.image}
                         className="img-fluid"
                     />
                 </div>
                 <div className="col-md-8">
+                    <button onClick={() => addToCart(product)} className="btn btn-outline-primary add-to-cart-btn ">Add <FaPlus /> </button>
                     <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
+                        <h3 className="card-title">{product.name}</h3>
                         <p className="card-text">
-                            {product.weight}
+                        <span className="h4">{product.price}</span> / {product.weight}
                         </p>
-                        <button onClick={() => addToCart(product)} className="btn btn-outline-primary __float-right p-2">Add <FaPlus /> </button>
-                        <h3 className="card-title ">{product.price}</h3>
                     </div>
                 </div>
             </div>

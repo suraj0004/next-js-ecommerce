@@ -10,7 +10,7 @@ import ProductLoader from '@/components/product/ProductLoader'
 function Products({ fetchProducts, products }) {
 
   const router = useRouter()
-  const { shop_slug } = router.query;
+  const { shop_slug, category_slug } = router.query;
 
   const goBack = () => {
     router.push(`/${shop_slug}`)
@@ -18,8 +18,8 @@ function Products({ fetchProducts, products }) {
 
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    shop_slug && category_slug && fetchProducts( shop_slug, category_slug );
+  }, [ shop_slug, category_slug]);
 
 
   return (
@@ -49,7 +49,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: ( shop_slug, category_slug) => dispatch(fetchProducts( shop_slug, category_slug))
   }
 }
 

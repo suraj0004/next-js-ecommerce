@@ -1,3 +1,5 @@
+import axios from "axios";
+import { api_fail_error }  from "@/helpers/constant.js"
 import {
     CATEGORY_FETCH_REQUEST,
     CATEGORY_FETCH_SUCCESS,
@@ -24,45 +26,19 @@ export const categoryFailure = (error) => {
     }
 }
 
-export const fetchCategories = () => {
+export const fetchCategories = (shop_slug) => {
     return (dispatch) => {
-        // fetching data
+
         dispatch(categoryRequest())
-        setTimeout(() => {
-            const dummyCategories = [
-                {
-                    id: 1,
-                    name : "test 1",
-                    image : "/images/profile.jpg",
-                },
-                {
-                    id: 2,
-                    name : "test 2",
-                    image : "/images/profile.jpg",
-                },
-                {
-                    id: 3,
-                    name : "test 3",
-                    image : "/images/profile.jpg",
-                },
-                {
-                    id: 4,
-                    name : "test 4",
-                    image : "/images/profile.jpg",
-                },
-                {
-                    id: 5,
-                    name : "test 5",
-                    image : "/images/profile.jpg",
-                },
-                {
-                    id: 6,
-                    name : "test 6",
-                    image : "/images/profile.jpg",
-                },
-            ]
-            dispatch(categorySuccess(dummyCategories))
-        }, 5000);
-        console.log("fetching categories");
+        axios.get(`http://localhost/shopinventorymanagement/public/api/ecommerce/${shop_slug}`)
+        .then(response => {
+            if(response.data.success) {
+                dispatch(categorySuccess(response.data.data))
+            }else {
+                dispatch(categoryFailure(response.data.message))    
+            }
+        }).catch(error => {
+            dispatch(categoryFailure(api_fail_error))
+        })
     }
 }

@@ -2,7 +2,8 @@ import {
     CART_FETCH_REQUEST,
     CART_FETCH_SUCCESS,
     CART_FETCH_FAILURE,
-    UPDATE_CART
+    UPDATE_CART,
+    UPDATE_ITEM_QUANTITY
 } from './cartTypes';
 
 const initialState = {
@@ -15,9 +16,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case CART_FETCH_REQUEST:
             return {
+                ...state,
                 loading: true,
-                error: null,
-                data: [],
             };
 
         case CART_FETCH_SUCCESS:
@@ -38,6 +38,25 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: data,
+            }
+        case UPDATE_ITEM_QUANTITY:
+            var data = state.data;
+            if( action.payload.quantity){
+                data = data.map((item) => {
+                    if(item.id === action.payload.id){
+                        item.quantity = action.payload.quantity;
+                    }
+                    return item;
+                });
+            }else{
+                data = data.filter((item) => {
+                    return !!(item.quantity)
+                });
+            }
+            return {
+                ...state,
+                data: data,
+                loading: false,
             }
         default:
             return state;

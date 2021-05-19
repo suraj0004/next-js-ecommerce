@@ -8,6 +8,8 @@
         "@/public/*": ["components/*"],
         "@/redux/*": ["redux/*"],
         "@/styles/*": ["styles/*"],
+        "@/helpers/*": ["helpers/*"],
+        "@/indexDB/*": ["indexDB/*"],
       }
     }
   }

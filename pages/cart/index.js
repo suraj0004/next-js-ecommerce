@@ -1,20 +1,18 @@
 import { useRouter } from 'next/router'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
-import { fetchcart } from '@/redux/index'
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import CartList from '@/components/cart/CartList'
+import CheckoutDetails from "@/components/cart/checkout/CheckoutDetails"
 
-function Cart({ fetchcart, cart }) {
+
+function Cart({  cart }) {
 
   const router = useRouter()
   const goBack = () => {
     router.back()
   }
 
-  useEffect(() => {
-    fetchcart();
-  }, []);
-
+  console.log("cartttt");
   console.log(cart);
 
   return (
@@ -25,7 +23,20 @@ function Cart({ fetchcart, cart }) {
       </div>
       </h3>
       <div className="row pt-200">
-
+      <div className="col-lg-4 bg-white border">
+         <CheckoutDetails/>
+        </div>
+        <div className="col-lg-1">
+          <br/>
+        </div>
+       
+        <div className="col-lg-7 p-1 card">
+          {
+            (cart.loading)
+            ?"Loading"
+            :<CartList cart={cart.data} />
+          }
+        </div>
       </div>
     </>
   )
@@ -37,10 +48,5 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchcart: () => dispatch(fetchcart())
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps)(Cart);

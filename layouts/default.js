@@ -1,8 +1,17 @@
 import Head from 'next/head'
 import Header from '../components/header';
 import Footer from '../components/footer';
+import { fetchcart } from '@/redux/index';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-export default function Layout({ children }) {
+function Layout({ children, fetchcart }) {
+
+    
+  useEffect(() => {
+    fetchcart();
+  }, []);
+  
     return (
         <>
             <Head>
@@ -25,3 +34,11 @@ export default function Layout({ children }) {
         </>
     )
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      fetchcart: () => dispatch(fetchcart())
+    }
+  }
+  
+  export default connect(null, mapDispatchToProps)(Layout);

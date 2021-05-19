@@ -16,9 +16,9 @@ export default function Profile() {
                           <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                               
                           </div>
-                          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="card bg-dark text-white shadow-lg p-3 mb-5 bg-white rounded category">
-                              <h4 class="text-center text-primary">Enter Your Details</h4>
+                          <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <div class="card bg-dark text-white shadow-sm p-3 mb-5 bg-white rounded category">
+                              <h4 class="text-center text-primary pb-4 pt-2">Update your Profile</h4>
                               <div className="form-group">
                                   <input className="form-control" name="name" placeholder="Enter Your Name" />  
                               </div>   
@@ -35,13 +35,13 @@ export default function Profile() {
                                   <input className="form-control" name="cpassword" placeholder="Confirm Password" />  
                               </div>   
                               <div className="form-group">
-                                   <button className="btn btn-primary">Submit</button>
+                                   <button className="btn btn-primary">Update</button>
                               </div>
                             </div>  
                           </div>
-                          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                          {/* <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                               
-                          </div>
+                          </div> */}
                           
                             
                     </div>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from '@/services/api';
 import { api_fail_error }  from "@/helpers/constant.js"
 import {
     CATEGORY_FETCH_REQUEST,
@@ -30,7 +30,7 @@ export const fetchCategories = (shop_slug) => {
     return (dispatch) => {
 
         dispatch(categoryRequest())
-        axios.get(`http://localhost/shopinventorymanagement/public/api/ecommerce/${shop_slug}`)
+        api.get(shop_slug)
         .then(response => {
             if(response.data.success) {
                 dispatch(categorySuccess(response.data.data))

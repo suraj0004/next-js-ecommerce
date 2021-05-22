@@ -1,7 +1,26 @@
-export default function Profile() {
+import React from 'react';
+
+
+
+
+
+
+export default function checkout() {
+  
+
     return (
       <>
-        <h3 className="header_h3">
+
+
+
+
+
+
+
+
+
+
+         <h3 className="header_h3">
           <div className="container ">
               
           </div>
@@ -14,13 +33,36 @@ export default function Profile() {
   
                       <div className="row">
                             <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <div class="card bg-dark  shadow-sm p-3 mb-5 bg-white rounded category">
+                                <div className="card bg-dark  shadow-sm p-3 mb-5 bg-white rounded category">
                                     <p className="text-primary">User Name</p>
                                 </div>
+                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                  Launch demo modal
+                                </button>
+
+<div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog" role="document">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div className="modal-body">
+        ...
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" className="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
                             </div>
                             <div className="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                              <div class="card bg-dark  shadow-sm p-3 mb-5 bg-white rounded category">
-                                <h4 class="text-center text-primary">Checkout</h4>
+                              <div className="card bg-dark  shadow-sm p-3 mb-5 bg-white rounded category">
+                                <h4 className="text-center text-primary">Checkout</h4>
                                 <div className="form-group">
                                     <input className="form-control" name="name" placeholder="Enter Your Name" />  
                                 </div>   
@@ -51,6 +93,9 @@ export default function Profile() {
               </div> 
             </div>
         </div>
+       
+      
+      
       </>
     )
   }

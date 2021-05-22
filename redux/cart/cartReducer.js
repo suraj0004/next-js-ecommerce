@@ -3,7 +3,8 @@ import {
     CART_FETCH_SUCCESS,
     CART_FETCH_FAILURE,
     UPDATE_CART,
-    UPDATE_ITEM_QUANTITY
+    UPDATE_ITEM_QUANTITY,
+    DELETE_PRODUCT,
 } from './cartTypes';
 
 const initialState = {
@@ -18,6 +19,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
+                data : []
             };
 
         case CART_FETCH_SUCCESS:
@@ -41,23 +43,28 @@ const reducer = (state = initialState, action) => {
             }
         case UPDATE_ITEM_QUANTITY:
             var data = state.data;
-            if( action.payload.quantity){
                 data = data.map((item) => {
                     if(item.id === action.payload.id){
                         item.quantity = action.payload.quantity;
                     }
                     return item;
                 });
-            }else{
-                data = data.filter((item) => {
-                    return !!(item.quantity)
-                });
-            }
+            
             return {
                 ...state,
                 data: data,
                 loading: false,
             }
+
+            case DELETE_PRODUCT:
+                var data = state.data;
+                    data = data.filter((item) => (item.id !== action.payload));
+                
+                return {
+                    ...state,
+                    data: data,
+                    loading: false,
+                }
         default:
             return state;
     }

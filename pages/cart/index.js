@@ -3,17 +3,19 @@ import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import CartList from '@/components/cart/CartList'
 import CheckoutDetails from "@/components/cart/checkout/CheckoutDetails"
+import { fetchcart } from '@/redux/index';
+import { useEffect } from 'react';
 
-
-function Cart({  cart }) {
+function Cart({ cart, global, fetchcart }) {
 
   const router = useRouter()
   const goBack = () => {
     router.back()
   }
 
-  console.log("cartttt");
-  console.log(cart);
+  useEffect(() => {
+    fetchcart();
+  }, []);
 
   return (
     <>
@@ -32,7 +34,7 @@ function Cart({  cart }) {
        
         <div className="col-lg-7 p-1 card">
           {
-            (cart.loading)
+            (global.loading)
             ?"Loading"
             :<CartList cart={cart.data} />
           }
@@ -45,8 +47,15 @@ function Cart({  cart }) {
 const mapStateToProps = (state, ownProps) => {
   return {
     cart: state.cart,
+    global: state.global,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchcart: () => dispatch(fetchcart())
   }
 }
 
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

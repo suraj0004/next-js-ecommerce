@@ -7,7 +7,7 @@ import ProductList from '@/components/product/ProductList'
 import { useEffect } from 'react';
 import ProductLoader from '@/components/product/ProductLoader'
 
-function Products({ fetchProducts, products }) {
+function Products({ fetchProducts, products, global }) {
 
   const router = useRouter()
   const { shop_slug, category_slug } = router.query;
@@ -31,7 +31,7 @@ function Products({ fetchProducts, products }) {
       </h3>
       <div className="row pt-200">
         {
-          products.loading
+          global.loading
             ? <ProductLoader />
             : <ProductList products={products.data} />
         }
@@ -44,6 +44,7 @@ function Products({ fetchProducts, products }) {
 const mapStateToProps = (state, ownProps) => {
   return {
     products: state.products,
+    global: state.global,
   }
 }
 

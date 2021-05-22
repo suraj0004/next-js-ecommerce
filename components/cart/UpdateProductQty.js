@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { updateCartProduct } from '@/redux/index';
+import { updateCartProduct, deleteCartProduct } from '@/redux/index';
 import { connect } from 'react-redux';
 
-function UpdateProductQty({className, item, updateCartProduct}) {
+function UpdateProductQty({className, item, updateCartProduct, deleteCartProduct}) {
 
     const addQuantity = (item) => {
         item.quantity++
@@ -12,7 +12,11 @@ function UpdateProductQty({className, item, updateCartProduct}) {
     
       const subQuantity = (item) => {
         item.quantity--
-        updateCartProduct(item);
+        if(item.quantity){
+          updateCartProduct(item);
+        }else{
+          deleteCartProduct(item);
+        }
       }
 
     return (
@@ -34,8 +38,11 @@ function UpdateProductQty({className, item, updateCartProduct}) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      updateCartProduct: (item) => dispatch(updateCartProduct(item))
+      updateCartProduct: (item) => dispatch(updateCartProduct(item)),
+      deleteCartProduct: (item) => dispatch(deleteCartProduct(item)),
     }
   }
+
+  
   
   export default connect(null, mapDispatchToProps)(UpdateProductQty);

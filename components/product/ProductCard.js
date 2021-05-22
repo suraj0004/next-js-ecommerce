@@ -2,8 +2,11 @@ import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { addToCart } from '@/redux/index';
 import { connect } from 'react-redux';
+import UpdateProductQty from '@/components/cart/UpdateProductQty'
 
-function ProductCard({ product, addToCart }) {
+function ProductCard({ product, addToCart, cart }) {
+
+    let item = cart.data.find( row => (row.product_id === product.id) )
     return (
         <div className="card shadow-lg m-0 p-0 m-3 ">
             <div className="row m-0 p-0 product">
@@ -14,7 +17,11 @@ function ProductCard({ product, addToCart }) {
                     />
                 </div>
                 <div className="col-md-8">
-                    <button onClick={() => addToCart(product)} className="btn btn-outline-primary add-to-cart-btn ">Add <FaPlus /> </button>
+                    {
+                        (item)
+                        ?<UpdateProductQty className="add-to-cart-btn" item={item} />
+                        :<button onClick={() => addToCart(product)} className="btn btn-outline-primary add-to-cart-btn ">Add <FaPlus /> </button>
+                    }
                     <div className="card-body">
                         <h3 className="card-title">{product.name}</h3>
                         <p className="card-text">
@@ -33,5 +40,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+const mapStateToProps = (state, ownProps) => {
+    return {
+      cart: state.cart,
+    }
+  }
+  
 
-export default connect(null, mapDispatchToProps)(ProductCard);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

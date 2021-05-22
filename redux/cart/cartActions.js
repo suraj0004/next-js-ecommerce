@@ -3,10 +3,13 @@ import {
     CART_FETCH_SUCCESS,
     CART_FETCH_FAILURE,
     UPDATE_CART,
-    UPDATE_ITEM_QUANTITY
+    UPDATE_ITEM_QUANTITY,
+    DELETE_PRODUCT,
 } from "./cartTypes";
 
-import { getCart, addCart } from "@/indexDB/cartDB"
+import { showLoader, stopLoader } from "@/redux/global/actions"
+
+import { cart_read, cart_insert, cart_update, cart_delete  } from "@/indexDB/cartDB"
 
 export const cartRequest = () => {
     return {
@@ -42,39 +45,70 @@ export const updateQuantity = (item) => {
     }
 }
 
+export const deleteQuantity = (id) => {
+    return {
+        type: DELETE_PRODUCT,
+        payload: id
+    }
+}
+
 export const fetchcart = () => {
     return (dispatch) => {
-        // fetching data
-        console.log("fetching cart");
-        dispatch(cartRequest())
-        setTimeout(() => {
-            let cart = getCart();
-            dispatch(cartSuccess(cart))
-        }, 1000);
+
+        dispatch(showLoader())
+        cart_read().then(data =>{
+            dispatch(cartSuccess(data))
+        }).catch(err =>{
+            console.log(err);
+        }).finally(() =>{
+            dispatch(stopLoader())
+        })
     }
 }
 
 export const addToCart = (item) => {
     return (dispatch) => {
+        dispatch(showLoader())
         item = {
             product_id: item.id,
             quantity: 1,
             product : item,
         }
-        addCart(item).then(id =>{
+        cart_insert(item).then(id =>{
             item.id = id
             dispatch(updateCart(item))
         }).catch(err =>{
             console.log(err);
+        }).finally(() =>{
+            dispatch(stopLoader())
         })
     }
 }
 
 export const updateCartProduct = (item) => {
     return (dispatch) => {
-        dispatch(cartRequest())
-        setTimeout(() => {
-            dispatch(updateQuantity(item))   
-        }, 1000);
+        dispatch(showLoader())
+        cart_update(item.id, item.quantity).then(id =>{
+             setTimeout(() => {
+                dispatch(updateQuantity(item))
+             }, 100);  
+        }).catch(err =>{
+            console.log(err);
+        }).finally(() =>{
+            dispatch(stopLoader())
+        })
+    }
+}
+
+export const deleteCartProduct = (item) => {
+    return (dispatch) => {
+        dispatch(showLoader())
+        cart_delete(item.id).then(() =>{
+             dispatch(deleteQuantity(item.id))  
+        }).catch(err =>{
+            console.log(err);
+        }).finally(() =>{
+            dispatch(stopLoader())
+        })
     }
 }

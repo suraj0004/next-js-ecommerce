@@ -2,13 +2,14 @@ import {
     SHOW_LOADER,
     STOP_LOADER,
     SET_AUTH_USER,
+    SET_SHOP_SLUG,
 } from "./types"
 
 import { errorNotification, successNotification } from "@/services/notification"
 import api from '@/services/api';
 import { api_fail_error }  from "@/helpers/constant.js"
 import { setCookie } from '@/services/cookie'
-import { login_cookie_key } from "@/helpers/constant"
+import { login_cookie_key, shop_slug_cookie } from "@/helpers/constant"
 
 
 export const showLoader = () => {
@@ -26,6 +27,14 @@ export const stopLoader = () => {
 export const setAuthUser = (payload) => {
     return {
         type: SET_AUTH_USER,
+        payload: payload
+    }
+}
+
+export const setShopSlug = (payload) => {
+    setCookie(shop_slug_cookie, payload, { path : '/' });
+    return {
+        type: SET_SHOP_SLUG,
         payload: payload
     }
 }

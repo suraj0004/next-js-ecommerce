@@ -9,13 +9,18 @@ import { useEffect } from 'react';
 function Cart({ cart, global, fetchcart }) {
 
   const router = useRouter()
+
+
+  useEffect(() => {
+    if(!global.shop_slug){
+      router.push("/")
+    }else
+    fetchcart();
+  }, [global]);
+
   const goBack = () => {
     router.back()
   }
-
-  useEffect(() => {
-    fetchcart();
-  }, []);
 
   return (
     <>

@@ -2,16 +2,18 @@ import {
     SHOW_LOADER,
     STOP_LOADER,
     SET_AUTH_USER,
+    SET_SHOP_SLUG,
 } from "./types"
 
 import { getCookie } from '@/services/cookie'
-import { login_cookie_key } from "@/helpers/constant"
+import { login_cookie_key, shop_slug_cookie } from "@/helpers/constant"
 
 const initialState = {
     loading: false,
     token: getCookie(login_cookie_key) || null,
     isAuthenticated: !!getCookie(login_cookie_key),
     user: null,
+    shop_slug : getCookie(shop_slug_cookie) || null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,11 +30,17 @@ const reducer = (state = initialState, action) => {
             }
         case SET_AUTH_USER:
             return {
+                ...state,
                 loading: false,
                 isAuthenticated: true,
                 token: action.payload.token,
                 user: action.payload.user,
             }
+        case SET_SHOP_SLUG:
+        return {
+            ...state,
+            shop_slug : action.payload
+        }
         default:
             return state
     }

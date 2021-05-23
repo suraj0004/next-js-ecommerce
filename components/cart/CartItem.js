@@ -7,7 +7,7 @@ function CartItem({ item }) {
     <div className="row p-2 m-2">
       <div className="col-md-3 text-center img-responsive">
         <img
-          src="http://localhost/shopinventorymanagement/public/image/default_image.png"
+          src={item.product.image}
           className="img-fluid"
           height="120"
           width="120"

@@ -50,3 +50,14 @@ export const cart_delete = (id) => {
     })
 }
 
+export const cart_truncate = () => {
+    return new Promise((resolve, reject) =>{
+        db.cart.where("id").above(0).delete()
+        .then((response) =>{
+            resolve(response)
+        }).catch((err) =>{
+            reject(err)
+        })
+    })
+}
+

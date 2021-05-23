@@ -6,7 +6,7 @@ import {
 } from "./types"
 
 import { errorNotification, successNotification } from "@/services/notification"
-import api from '@/services/api';
+import {api,authApi} from '@/services/api';
 import { api_fail_error }  from "@/helpers/constant.js"
 import { setCookie } from '@/services/cookie'
 import { login_cookie_key, shop_slug_cookie } from "@/helpers/constant"
@@ -94,4 +94,5 @@ export const setTokenCookies = (remember, token) =>{
          options = { path : '/',expires : date };
     }
     setCookie(login_cookie_key, token, options);
+    authApi.defaults.headers.Authorization = `Bearer ${token}`
 }

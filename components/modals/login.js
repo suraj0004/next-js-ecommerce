@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FaUserAlt, FaKey, FaUserPlus, FaLock } from 'react-icons/fa';
-import { doLogin } from '@/redux/index';
+import { doLogin, syncCart } from '@/redux/index';
 import { connect } from 'react-redux';
 
-const login = ({show, onHide, doLogin, showRegister}) => {
+const login = ({show, onHide, doLogin, showRegister, syncCart}) => {
     const [form, setForm] = useState({
         phone : "",
         password : "",
@@ -36,6 +36,7 @@ const login = ({show, onHide, doLogin, showRegister}) => {
         e.preventDefault();
         console.log(form);
         doLogin(form).then(() =>{
+            syncCart()
             onHide()
         })
     }
@@ -126,7 +127,8 @@ const login = ({show, onHide, doLogin, showRegister}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        doLogin: (payload) => dispatch(doLogin(payload))
+        doLogin: (payload) => dispatch(doLogin(payload)),
+        syncCart: () => dispatch(syncCart())
     }
 }
 

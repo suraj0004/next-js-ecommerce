@@ -9,7 +9,8 @@ import {
 
 import { showLoader, stopLoader } from "@/redux/global/actions"
 
-import { cart_read, cart_insert, cart_update, cart_delete  } from "@/indexDB/cartDB"
+import { cart_read, cart_insert, cart_update, cart_delete, cart_truncate  } from "@/indexDB/cartDB"
+import { authApi } from '@/services/api';
 
 export const cartRequest = () => {
     return {
@@ -53,35 +54,66 @@ export const deleteQuantity = (id) => {
 }
 
 export const fetchcart = () => {
-    return (dispatch) => {
+    return (dispatch,getState) => {
 
         dispatch(showLoader())
-        cart_read().then(data =>{
-            dispatch(cartSuccess(data))
-        }).catch(err =>{
-            console.log(err);
-        }).finally(() =>{
-            dispatch(stopLoader())
-        })
+
+        if(getState().global.isAuthenticated){
+            authApi.get(`/${getState().global.shop_slug}/cart/get`)
+            .then(response => {
+                dispatch(cartSuccess(response.data.data))
+            }).catch(error => {
+                console.log(error);
+            }).finally(() =>{
+                dispatch(stopLoader())
+            })
+        }else{
+            cart_read().then(data =>{
+                dispatch(cartSuccess(data))
+            }).catch(err =>{
+                console.log(err);
+            }).finally(() =>{
+                dispatch(stopLoader())
+            })
+        }
     }
 }
 
 export const addToCart = (item) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(showLoader())
-        item = {
-            product_id: item.id,
-            quantity: 1,
-            product : item,
+
+        if(getState().global.isAuthenticated){
+
+            item = {
+                product_id: item.id,
+            }
+
+            authApi.post(`/${getState().global.shop_slug}/cart/add`,item)
+            .then(response => {
+                dispatch(updateCart(response.data.data))
+            }).catch(error => {
+                console.log(error);
+            }).finally(() =>{
+                dispatch(stopLoader())
+            })
         }
-        cart_insert(item).then(id =>{
-            item.id = id
-            dispatch(updateCart(item))
-        }).catch(err =>{
-            console.log(err);
-        }).finally(() =>{
-            dispatch(stopLoader())
-        })
+        else{
+            item = {
+                product_id: item.id,
+                quantity: 1,
+                product : item,
+            }
+            cart_insert(item).then(id =>{
+                item.id = id
+                dispatch(updateCart(item))
+            }).catch(err =>{
+                console.log(err);
+            }).finally(() =>{
+                dispatch(stopLoader())
+            })
+        }
+      
     }
 }
 
@@ -109,6 +141,40 @@ export const deleteCartProduct = (item) => {
             console.log(err);
         }).finally(() =>{
             dispatch(stopLoader())
+        })
+    }
+}
+
+export const truncateCart = () => {
+
+}
+ 
+export const syncCart = () => {
+    return (dispatch,getState) => {
+        cart_read().then(cart =>{
+
+            cart = cart.map(item =>{
+                return {
+                    product_id : item.product_id,
+                    quantity : item.quantity,
+                }
+            });
+
+            authApi.post(`/${getState().global.shop_slug}/cart/sync`,{cart})
+            .then(response => {
+                console.log(response);
+                cart_truncate().then((ids) =>{
+                    console.log(ids);
+                    dispatch(fetchcart())
+                }).catch(error => {
+                    console.log(error);
+                })
+            }).catch(error => {
+                console.log(error);
+            })
+
+        }).catch(err =>{
+            console.log(err);
         })
     }
 }

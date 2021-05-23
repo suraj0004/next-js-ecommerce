@@ -1,4 +1,4 @@
-import api from '@/services/api';
+import {api} from '@/services/api';
 import { api_fail_error }  from "@/helpers/constant.js"
 
 import {
@@ -6,6 +6,8 @@ import {
     PRODUCT_FETCH_SUCCESS,
     PRODUCT_FETCH_FAILURE
 } from "./productTypes";
+
+import { showLoader, stopLoader } from "@/redux/global/actions"
 
 export const productRequest = () => {
     return {
@@ -30,7 +32,7 @@ export const productFailure = (error) => {
 export const fetchProducts = ( shop_slug, category_slug) => {
     return (dispatch) => {
         // fetching data
-        dispatch(productRequest())
+        dispatch(showLoader())
         api.get(`${shop_slug}/${category_slug}`)
         .then(response => {
             if(response.data.success) {
@@ -38,8 +40,10 @@ export const fetchProducts = ( shop_slug, category_slug) => {
             }else{
                 dispatch(productFailure(response.data.message))    
             }
+            dispatch(stopLoader())
         }).catch(error => {
             dispatch(productFailure(api_fail_error))
+            dispatch(stopLoader())
         })
     }
 }

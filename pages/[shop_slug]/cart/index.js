@@ -10,12 +10,14 @@ function Cart({ cart, global, fetchcart }) {
 
   const router = useRouter()
 
+  useEffect(() => {
+    fetchcart();
+  }, []);
 
   useEffect(() => {
     if(!global.shop_slug){
       router.push("/")
-    }else
-    fetchcart();
+    }
   }, [global]);
 
   const goBack = () => {

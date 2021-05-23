@@ -53,8 +53,8 @@ export default function Profile() {
                               
                           </div>
                           <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                            <div class="card bg-dark text-white shadow-sm p-3 mb-5 bg-white rounded category">
-                              <h4 class="text-center text-primary pb-4 pt-2">Update your Profile</h4>
+                            <div className="card bg-dark text-white shadow-sm p-3 mb-5 bg-white rounded category">
+                              <h4 className="text-center text-primary pb-4 pt-2">Update your Profile</h4>
                               <div className="form-group">
                                   <input className="form-control" type="text" name="name" placeholder="Enter Your Name" />  
                               </div>   

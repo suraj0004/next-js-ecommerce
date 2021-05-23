@@ -10,7 +10,7 @@ function CheckoutDetails(props) {
                     <Link href="/cart" className="nav-link" >
                         <FaShoppingCart size="40" />
                     </Link>
-                    <span class="badge badge-danger cart_count">{5}</span>
+                    <span className="badge badge-danger cart_count">{5}</span>
                 </Navbar.Text> */}
 
                 {/* <button className="btn btn-danger float-right btn-sm mt-4 mr-3">Clear Cart</button> */}
@@ -35,7 +35,7 @@ function CheckoutDetails(props) {
                 </div>
                 <div className="col-3 text-center p-0 m-0">
                      
-                     <span class="badge badge-success">10 - 11</span>
+                     <span className="badge badge-success">10 - 11</span>
                 </div>
                 <div className="col-3 text-right p-0 m-0 font-weight-bold">
                     300 Rs.
@@ -48,7 +48,7 @@ function CheckoutDetails(props) {
                 </div>
                 <div className="col-3 text-center p-0 m-0">
                      
-                     <span class="badge badge-success">3 x 100 Rs</span>
+                     <span className="badge badge-success">3 x 100 Rs</span>
                 </div>
                 <div className="col-3 text-right p-0 m-0 font-weight-bold">
                     300 Rs.

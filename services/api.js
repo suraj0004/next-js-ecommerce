@@ -1,6 +1,6 @@
 import Axios from "axios";
-import { getCookie } from '@/services/cookie'
-import { login_cookie_key} from "@/helpers/constant"
+import { getCookie } from '~/services/cookie'
+import { login_cookie_key} from "~/helpers/constant"
 
 export const api = Axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_BASE_PATH,

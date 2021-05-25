@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { updateCartProduct, deleteCartProduct } from '@/redux/index';
+import { updateCartProduct, deleteCartProduct } from '~/redux/index';
 import { connect } from 'react-redux';
 
 function UpdateProductQty({className, item, updateCartProduct, deleteCartProduct}) {

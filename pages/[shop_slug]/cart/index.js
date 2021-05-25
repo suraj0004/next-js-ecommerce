@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
 import { connect } from 'react-redux';
-import CartList from '@/components/cart/CartList'
-import CheckoutDetails from "@/components/cart/checkout/CheckoutDetails"
-import { fetchcart } from '@/redux/index';
+import CartList from '~/components/cart/CartList'
+import CheckoutDetails from "~/components/cart/checkout/CheckoutDetails"
+import { fetchcart } from '~/redux/index';
 import { useEffect } from 'react';
 
 function Cart({ cart, global, fetchcart }) {
@@ -32,12 +32,8 @@ function Cart({ cart, global, fetchcart }) {
       </div>
       </h3>
       <div className="row pt-200">
-      <div className="col-lg-4 bg-white border">
-         <CheckoutDetails/>
-        </div>
-        <div className="col-lg-1">
-          <br/>
-        </div>
+      
+        
        
         <div className="col-lg-7 p-1 card">
           {
@@ -46,6 +42,19 @@ function Cart({ cart, global, fetchcart }) {
             :<CartList cart={cart.data} />
           }
         </div>
+
+        <div className="col-lg-1">
+          <br/>
+        </div>
+
+        <div className="col-lg-4 bg-white border">
+         {
+            (cart.shop_info.loading || !cart.shop_info.data)
+            ?"Loading"
+            :<CheckoutDetails shop_info={cart.shop_info.data} cart={cart.data} />
+          }
+        </div>
+
       </div>
     </>
   )

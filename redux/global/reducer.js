@@ -5,8 +5,8 @@ import {
     SET_SHOP_SLUG,
 } from "./types"
 
-import { getCookie } from '@/services/cookie'
-import { login_cookie_key, shop_slug_cookie } from "@/helpers/constant"
+import { getCookie } from '~/services/cookie'
+import { login_cookie_key, shop_slug_cookie } from "~/helpers/constant"
 
 const initialState = {
     loading: false,

@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { addToCart } from '@/redux/index';
+import { addToCart } from '~/redux/index';
 import { connect } from 'react-redux';
-import UpdateProductQty from '@/components/cart/UpdateProductQty'
+import UpdateProductQty from '~/components/cart/UpdateProductQty'
 
 function ProductCard({ product, addToCart, cart }) {
 

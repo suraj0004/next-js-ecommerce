@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Header from '../components/header';
 import Footer from '../components/footer';
-import { fetchcart } from '@/redux/index';
+import { fetchcart } from '~/redux/index';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 

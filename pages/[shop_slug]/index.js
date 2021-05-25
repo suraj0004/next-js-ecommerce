@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { fetchCategories, setShopSlug } from '@/redux/index'
-import CategoryList from '@/components/category/CategoryList'
+import { fetchCategories, setShopSlug } from '~/redux/index'
+import CategoryList from '~/components/category/CategoryList'
 import { useEffect } from 'react';
-import CategoryLoader from '@/components/category/CategoryLoader'
+import CategoryLoader from '~/components/category/CategoryLoader'
 import { useRouter } from 'next/router'
 
 function Home({fetchCategories, categories, setShopSlug}) {

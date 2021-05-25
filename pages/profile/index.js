@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { updateProfile } from '@/redux/index'
+import { updateProfile } from '~/redux/index'
 import { useEffect } from 'react';
 
 

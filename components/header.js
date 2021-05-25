@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { Navbar } from 'react-bootstrap';
 import { FaUserCircle, FaShoppingCart } from 'react-icons/fa';
 import { connect } from 'react-redux';
-import LoginModal from "@/components/modals/login"
-import RegisterModal from "@/components/modals/register"
+import LoginModal from "~/components/modals/login"
+import RegisterModal from "~/components/modals/register"
 
 const header = ({ cart_count, global }) => {
 

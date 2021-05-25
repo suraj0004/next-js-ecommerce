@@ -5,11 +5,11 @@ import {
     SET_SHOP_SLUG,
 } from "./types"
 
-import { errorNotification, successNotification } from "@/services/notification"
-import {api,authApi} from '@/services/api';
-import { api_fail_error }  from "@/helpers/constant.js"
-import { setCookie } from '@/services/cookie'
-import { login_cookie_key, shop_slug_cookie } from "@/helpers/constant"
+import { errorNotification, successNotification } from "~/services/notification"
+import {api,authApi} from '~/services/api';
+import { api_fail_error }  from "~/helpers/constant.js"
+import { setCookie } from '~/services/cookie'
+import { login_cookie_key, shop_slug_cookie } from "~/helpers/constant"
 
 
 export const showLoader = () => {

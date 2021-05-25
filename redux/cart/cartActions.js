@@ -5,12 +5,16 @@ import {
     UPDATE_CART,
     UPDATE_ITEM_QUANTITY,
     DELETE_PRODUCT,
+    SHOP_INFO_FETCH_REQUEST,
+    SHOP_INFO_FETCH_SUCCESS,
+    SHOP_INFO_FETCH_FAILURE,
 } from "./cartTypes";
 
-import { showLoader, stopLoader } from "@/redux/global/actions"
+import { showLoader, stopLoader } from "~/redux/global/actions"
 
-import { cart_read, cart_insert, cart_update, cart_delete, cart_truncate } from "@/indexDB/cartDB"
-import { authApi } from '@/services/api';
+import { cart_read, cart_insert, cart_update, cart_delete, cart_truncate } from "~/indexDB/cartDB"
+import { authApi, api } from '~/services/api';
+import { api_fail_error } from "~/helpers/constant.js"
 
 export const cartRequest = () => {
     return {
@@ -62,6 +66,7 @@ export const fetchcart = () => {
             authApi.get(`/${getState().global.shop_slug}/cart/get`)
                 .then(response => {
                     dispatch(cartSuccess(response.data.data))
+                    dispatch(fetchShopInfo())
                 }).catch(error => {
                     console.log(error);
                 }).finally(() => {
@@ -70,6 +75,7 @@ export const fetchcart = () => {
         } else {
             cart_read().then(data => {
                 dispatch(cartSuccess(data))
+                dispatch(fetchShopInfo())
             }).catch(err => {
                 console.log(err);
             }).finally(() => {
@@ -207,3 +213,48 @@ export const syncCart = () => {
         })
     }
 }
+
+
+
+
+
+export const shopInfoRequest = () => {
+    return {
+        type: SHOP_INFO_FETCH_REQUEST
+    }
+}
+
+export const shopInfoSuccess = (data) => {
+    return {
+        type: SHOP_INFO_FETCH_SUCCESS,
+        payload: data
+    }
+}
+
+export const shopInfoFailure = (error) => {
+    return {
+        type: SHOP_INFO_FETCH_FAILURE,
+        payload: error
+    }
+}
+
+
+
+export const fetchShopInfo = () => {
+    return (dispatch, getState) => {
+        dispatch(shopInfoRequest())
+        api.get(`/${getState().global.shop_slug}/shop/info`)
+            .then(response => {
+                if (response.data.success) {
+                    dispatch(shopInfoSuccess(response.data.data))
+                } else {
+                    dispatch(shopInfoFailure(response.data.message))
+                }
+            }).catch(error => {
+                dispatch(shopInfoFailure(api_fail_error))
+            })
+    }
+}
+
+
+

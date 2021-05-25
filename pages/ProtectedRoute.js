@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router'
 import { connect } from 'react-redux';
-import RedirectToHome from '@/components/RedirectToHome'
+import RedirectToHome from '~/components/RedirectToHome'
 
 const ProtectedRoute = ({ children, global }) => {
     const authRoutes = [

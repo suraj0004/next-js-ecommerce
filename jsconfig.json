@@ -2,15 +2,15 @@
     "compilerOptions": {
       "baseUrl": ".",
       "paths": {
-        "@/components/*": ["components/*"],
-        "@/layouts/*": ["layouts/*"],
-        "@/pages/*": ["pages/*"],
-        "@/public/*": ["components/*"],
-        "@/redux/*": ["redux/*"],
-        "@/styles/*": ["styles/*"],
-        "@/helpers/*": ["helpers/*"],
-        "@/indexDB/*": ["indexDB/*"],
-        "@/services/*": ["services/*"],
+        "~/components/*": ["components/*"],
+        "~/layouts/*": ["layouts/*"],
+        "~/pages/*": ["pages/*"],
+        "~/public/*": ["components/*"],
+        "~/redux/*": ["redux/*"],
+        "~/styles/*": ["styles/*"],
+        "~/helpers/*": ["helpers/*"],
+        "~/indexDB/*": ["indexDB/*"],
+        "~/services/*": ["services/*"],
       }
     }
   }

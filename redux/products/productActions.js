@@ -1,5 +1,5 @@
-import {api} from '@/services/api';
-import { api_fail_error }  from "@/helpers/constant.js"
+import {api} from '~/services/api';
+import { api_fail_error }  from "~/helpers/constant.js"
 
 import {
     PRODUCT_FETCH_REQUEST,
@@ -7,7 +7,7 @@ import {
     PRODUCT_FETCH_FAILURE
 } from "./productTypes";
 
-import { showLoader, stopLoader } from "@/redux/global/actions"
+import { showLoader, stopLoader } from "~/redux/global/actions"
 
 export const productRequest = () => {
     return {

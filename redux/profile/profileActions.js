@@ -1,5 +1,5 @@
 import axios from "axios";
-import { api_fail_error }  from "@/helpers/constant.js"
+import { api_fail_error }  from "~/helpers/constant.js"
 import {
     PROFILE_FETCH_REQUEST,
     PROFILE_FETCH_SUCCESS,

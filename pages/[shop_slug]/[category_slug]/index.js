@@ -2,10 +2,10 @@ import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router'
 
 import { connect } from 'react-redux';
-import { fetchProducts } from '@/redux/index'
-import ProductList from '@/components/product/ProductList'
+import { fetchProducts } from '~/redux/index'
+import ProductList from '~/components/product/ProductList'
 import { useEffect } from 'react';
-import ProductLoader from '@/components/product/ProductLoader'
+import ProductLoader from '~/components/product/ProductLoader'
 
 function Products({ fetchProducts, products, global }) {
 

@@ -1,5 +1,5 @@
-import {api} from '@/services/api';
-import { api_fail_error }  from "@/helpers/constant.js"
+import {api} from '~/services/api';
+import { api_fail_error }  from "~/helpers/constant.js"
 import {
     CATEGORY_FETCH_REQUEST,
     CATEGORY_FETCH_SUCCESS,

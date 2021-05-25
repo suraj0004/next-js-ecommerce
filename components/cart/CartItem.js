@@ -1,5 +1,6 @@
 import React from 'react';
-import UpdateProductQty from '@/components/cart/UpdateProductQty'
+import UpdateProductQty from '~/components/cart/UpdateProductQty'
+import {FaRupeeSign} from "react-icons/fa"
 
 function CartItem({ item }) {
 
@@ -17,9 +18,8 @@ function CartItem({ item }) {
         <h6 className="h6">{item.product.name}</h6>
         <UpdateProductQty className="float-right" item={item} />
         <p className="card-text">
-          Rs. {item.product.price} / {item.product.weight}
+         <span className="h5"> <FaRupeeSign size="15"/> {item.product.price}</span> / {item.product.weight}
         </p>
-        <h6 className="h6">Total Amount : Rs {item.product.price * item.quantity} /-</h6>
       </div>
     </div>
   );

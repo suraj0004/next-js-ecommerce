@@ -32,7 +32,7 @@ const header = ({ cart_count, global }) => {
           <Navbar.Text className="m-2">
             {
               global.isAuthenticated
-                ? <Link href="/profile" className="btn nav-link"><FaUserCircle size="40" role="button" /></Link>
+                ? <Link href="/my-account" className="btn nav-link"><FaUserCircle size="40" role="button" /></Link>
                 : <button onClick={() => setLoginModal(true)} className="btn nav-link"><FaUserCircle size="40" role="button" /></button>
             }
           </Navbar.Text>

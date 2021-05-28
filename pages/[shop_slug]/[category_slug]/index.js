@@ -18,8 +18,8 @@ function Products({ fetchProducts, products, global }) {
 
 
   useEffect(() => {
-    shop_slug && category_slug && fetchProducts( shop_slug, category_slug );
-  }, [ shop_slug, category_slug]);
+    shop_slug && category_slug && fetchProducts(shop_slug, category_slug);
+  }, [shop_slug, category_slug]);
 
 
   return (
@@ -29,12 +29,14 @@ function Products({ fetchProducts, products, global }) {
           <button type="button" onClick={goBack} className="btn"> <FaRegArrowAltCircleLeft size="35" /> </button> Category Name
         </div>
       </h3>
-      <div className="row pt-200">
-        {
-          global.loading
-            ? <ProductLoader />
-            : <ProductList products={products.data} />
-        }
+      <div className="pt-200">
+        <div className="row">
+          {
+            global.loading
+              ? <ProductLoader />
+              : <ProductList products={products.data} />
+          }
+        </div>
       </div>
     </>
   )
@@ -50,7 +52,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: ( shop_slug, category_slug) => dispatch(fetchProducts( shop_slug, category_slug))
+    fetchProducts: (shop_slug, category_slug) => dispatch(fetchProducts(shop_slug, category_slug))
   }
 }
 

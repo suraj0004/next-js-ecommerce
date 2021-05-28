@@ -15,7 +15,7 @@ function Cart({ cart, global, fetchcart }) {
   }, []);
 
   useEffect(() => {
-    if(!global.shop_slug){
+    if (!global.shop_slug) {
       router.push("/")
     }
   }, [global]);
@@ -31,30 +31,28 @@ function Cart({ cart, global, fetchcart }) {
           <button type="button" onClick={goBack} className="btn"> <FaRegArrowAltCircleLeft size="35" /> </button> Back
       </div>
       </h3>
-      <div className="row pt-200">
-      
-        
-       
-        <div className="col-lg-7 p-1 card">
-          {
-            (global.loading)
-            ?"Loading"
-            :<CartList cart={cart.data} />
-          }
-        </div>
+      <div className="pt-200">
+        <div className="row">
+          <div className="col-lg-7 p-1 card">
+            {
+              (global.loading)
+                ? "Loading"
+                : <CartList cart={cart.data} />
+            }
+          </div>
 
-        <div className="col-lg-1">
-          <br/>
-        </div>
+          <div className="col-lg-1">
+            <br />
+          </div>
 
-        <div className="col-lg-4 bg-white border">
-         {
-            (cart.shop_info.loading || !cart.shop_info.data)
-            ?"Loading"
-            :<CheckoutDetails shop_info={cart.shop_info.data} cart={cart.data} />
-          }
+          <div className="col-lg-4 bg-white border">
+            {
+              (cart.shop_info.loading || !cart.shop_info.data)
+                ? "Loading"
+                : <CheckoutDetails shop_info={cart.shop_info.data} cart={cart.data} />
+            }
+          </div>
         </div>
-
       </div>
     </>
   )

@@ -1,14 +1,16 @@
 import React, {useEffect} from 'react';
 import { useRouter } from 'next/router'
-const RedirectToHome = () => {
+const RedirectToHome = ({toPath}) => {
 
     const router = useRouter()
     useEffect(()=> {
-        router.push('/')
+        router.push(toPath)
     },[])
     return (
-        <div className="row pt-200 text-center">
+        <div className="pt-200 text-center">
+            <div className="row">
             Waiting.....
+            </div>
         </div>
     );
 };

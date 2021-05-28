@@ -3,12 +3,76 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import ShopTiming from "~/components/cart/ShopTiming"
 import { TimePicker, MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import MomentUtils from '@date-io/moment';
-import GrandTotal from "~/components/cart/GrandTotal"
+import GrandTotal from "~/components/cart/GrandTotal";
+import { authApi } from "~/services/api"
+import { connect } from 'react-redux';
+import { fetchcart } from '~/redux/index';
+import { errorNotification, successNotification } from "~/services/notification"
+import { api_fail_error } from "~/helpers/constant"
 
-const Checkout = ({ show, onHide, open_at, close_at, grand_total }) => {
+
+
+const Checkout = ({ show, onHide, open_at, close_at, grand_total, global, fetchcart }) => {
     const [selectedDate, handleDateChange] = useState(new Date());
     const [selectedFromTime, handleFromTimeChange] = useState(null);
     const [selectedToTime, handleToTimeChange] = useState(null);
+
+
+    const handleCheckout = (e) => {
+        e.preventDefault();
+
+        let fromDate = selectedFromTime;
+        let toDate = selectedToTime;
+
+        if (!selectedDate) {
+            alert('Please select date')
+            return
+        }
+        if (!fromDate) {
+            alert('Please select from time')
+            return
+        }
+        if (!toDate) {
+            alert('Please select to time')
+            return
+        }
+
+        if (selectedDate._d) {
+            handleDateChange(selectedDate._d)
+        }
+
+        fromDate._d.setDate(selectedDate.getDate());
+        fromDate._d.setMonth(selectedDate.getMonth());
+        fromDate._d.setFullYear(selectedDate.getFullYear());
+
+        toDate._d.setDate(selectedDate.getDate());
+        toDate._d.setMonth(selectedDate.getMonth());
+        toDate._d.setFullYear(selectedDate.getFullYear());
+
+        fromDate = fromDate.format("Y-MM-DD HH:mm:ss")
+        toDate = toDate.format("Y-MM-DD HH:mm:ss")
+
+        const payload = {
+            fromDate: fromDate,
+            toDate: toDate
+        }
+
+        authApi.post(`order/checkout/${global.shop_slug}`, payload)
+            .then(response => {
+                console.log(response);
+                if (response.data.success) {
+                    fetchcart();
+                    successNotification(response.data.message)
+                } else {
+                    errorNotification(response.data.message)
+                }
+            }).catch(err => {
+                console.log(err);
+                errorNotification(api_fail_error)
+            })
+    }
+
+
 
     return (
         <Modal
@@ -31,7 +95,7 @@ const Checkout = ({ show, onHide, open_at, close_at, grand_total }) => {
                     />
                 </h3>
                 <hr />
-                <Form>
+                <Form onSubmit={handleCheckout}>
                     <Form.Group controlId="formGroupEmail">
 
                         <div className="text-center h6">Pick-Up Date and Timing</div>
@@ -44,6 +108,7 @@ const Checkout = ({ show, onHide, open_at, close_at, grand_total }) => {
                                 onChange={handleDateChange}
                                 orientation="landscape"
                                 variant="static"
+                                format="YYYY"
                             />
                         </MuiPickersUtilsProvider>
 
@@ -93,5 +158,18 @@ const Checkout = ({ show, onHide, open_at, close_at, grand_total }) => {
     );
 };
 
+const mapStateToProps = (state, ownProps) => {
+    return {
+        global: state.global,
+    }
+}
 
-export default Checkout;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchcart: () => dispatch(fetchcart())
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

@@ -4,17 +4,18 @@ import {
     SET_AUTH_USER,
     SET_SHOP_SLUG,
     UNSET_AUTH_USER,
+    SET_USER_DATA,
 } from "./types"
 
 import { getCookie } from '~/services/cookie'
-import { login_cookie_key, shop_slug_cookie } from "~/helpers/constant"
+import { login_cookie_key, shop_slug_cookie, user_cookie_key } from "~/helpers/constant"
 
 const initialState = {
     loading: false,
     token: getCookie(login_cookie_key) || null,
     isAuthenticated: !!getCookie(login_cookie_key),
-    user: null,
-    shop_slug : getCookie(shop_slug_cookie) || null,
+    user: getCookie(user_cookie_key) || null,
+    shop_slug: getCookie(shop_slug_cookie) || null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -38,10 +39,10 @@ const reducer = (state = initialState, action) => {
                 user: action.payload.user,
             }
         case SET_SHOP_SLUG:
-        return {
-            ...state,
-            shop_slug : action.payload
-        }
+            return {
+                ...state,
+                shop_slug: action.payload
+            }
         case UNSET_AUTH_USER:
             return {
                 ...state,
@@ -49,6 +50,13 @@ const reducer = (state = initialState, action) => {
                 isAuthenticated: false,
                 token: null,
                 user: null,
+            }
+
+        case SET_USER_DATA:
+            return {
+                ...state,
+                loading: false,
+                user: action.payload,
             }
         default:
             return state

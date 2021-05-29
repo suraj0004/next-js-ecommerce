@@ -7,6 +7,8 @@ const ProtectedRoute = ({ children, global }) => {
     const authRoutes = [
         "/profile",
         "/my-account",
+        "/my-account/orders",
+        "/my-account/orders/[order_no]",
     ];
     const router = useRouter()
     if (!global.isAuthenticated && authRoutes.includes(router.pathname) ) {

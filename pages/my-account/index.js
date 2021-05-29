@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useRouter } from 'next/router'
 import { FaRegArrowAltCircleLeft, FaUserAlt, FaListAlt, FaSignOutAlt, FaShoppingCart } from 'react-icons/fa';
 import Link from 'next/link'
 import { doLogOut } from '~/redux/index';
 import { connect } from 'react-redux';
+import ProfileModal from "~/components/modals/Profile"
+
 
 const index = ({ doLogOut, global }) => {
+
+    const [profileModalShow, setProfileModal] = useState(false);
+
     const router = useRouter()
 
     const goBack = () => {
@@ -14,9 +19,9 @@ const index = ({ doLogOut, global }) => {
 
     const singOut = () => {
         doLogOut().then(() => {
-            if(global.shop_slug){
+            if (global.shop_slug) {
                 router.push(`/${global.shop_slug}`);
-            }else{
+            } else {
                 router.push("/")
             }
         })
@@ -42,7 +47,8 @@ const index = ({ doLogOut, global }) => {
                     <div className="col-md-4 mb-3">
                         <div className="card text-center">
                             <div className="card-body account-menu">
-                                <h5 className="card-title link"> <FaUserAlt /><Link href="/my-account/profile"> My Profile</Link></h5>
+                                <h5 className="card-title link" onClick={() => setProfileModal(true)} >
+                                    <FaUserAlt />  My Profile</h5>
 
                             </div>
                         </div>
@@ -68,6 +74,12 @@ const index = ({ doLogOut, global }) => {
                     </div>
                 </div>
             </div>
+
+            <ProfileModal
+                show={profileModalShow}
+                onHide={() => setProfileModal(false)}
+            />
+
         </>
     );
 };

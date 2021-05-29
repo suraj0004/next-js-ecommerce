@@ -9,7 +9,7 @@ const index = ({ fetchOrderDetail, orderDetail }) => {
 
   const router = useRouter()
   const { order_no } = router.query;
-  console.log(router.query);
+  console.log(router);
 
   useEffect(() => {
     if (order_no) {

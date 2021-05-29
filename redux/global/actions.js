@@ -3,11 +3,12 @@ import {
     STOP_LOADER,
     SET_AUTH_USER,
     SET_SHOP_SLUG,
+    UNSET_AUTH_USER,
 } from "./types"
 
 import { errorNotification, successNotification } from "~/services/notification"
 import {api,authApi} from '~/services/api';
-import { setCookie } from '~/services/cookie'
+import { setCookie, removeCookie } from '~/services/cookie'
 import { login_cookie_key, shop_slug_cookie, api_fail_error } from "~/helpers/constant"
 
 
@@ -35,6 +36,12 @@ export const setShopSlug = (payload) => {
     return {
         type: SET_SHOP_SLUG,
         payload: payload
+    }
+}
+
+export const unsetAuthUser = () => {
+    return {
+        type: UNSET_AUTH_USER
     }
 }
 
@@ -94,4 +101,36 @@ export const setTokenCookies = (remember, token) =>{
     }
     setCookie(login_cookie_key, token, options);
     authApi.defaults.headers.Authorization = `Bearer ${token}`
+}
+
+export const removeTokenCookies = () =>{
+    removeCookie(login_cookie_key);
+    authApi.defaults.headers.Authorization = null;
+}
+
+
+
+export const doLogOut = () => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) =>{
+            dispatch(showLoader())
+            authApi.post("logout")
+                .then(response => {
+                    if (response.data.success) {
+                        removeTokenCookies()
+                        dispatch(unsetAuthUser())
+                        resolve()
+                    } else {
+                        errorNotification(response.data.message)
+                        reject()
+                    }
+                }).catch(error => {
+                    console.log(error);
+                    errorNotification(api_fail_error)
+                    reject()
+                }).finally(() => {
+                    dispatch(stopLoader())
+                })
+        })
+    }
 }

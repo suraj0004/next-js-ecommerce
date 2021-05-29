@@ -9,7 +9,7 @@ const register = ({show, onHide, doRegister, showLogin, syncCart}) => {
         phone : "",
         password : "",
         c_password : "",
-        remember : false
+        remember : true
     })
 
     const setPhone = (e) => {

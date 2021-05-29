@@ -2,12 +2,24 @@ import React from 'react';
 import { useRouter } from 'next/router'
 import { FaRegArrowAltCircleLeft, FaUserAlt, FaListAlt, FaSignOutAlt, FaShoppingCart } from 'react-icons/fa';
 import Link from 'next/link'
+import { doLogOut } from '~/redux/index';
+import { connect } from 'react-redux';
 
-const index = () => {
+const index = ({ doLogOut, global }) => {
     const router = useRouter()
 
     const goBack = () => {
         router.back()
+    }
+
+    const singOut = () => {
+        doLogOut().then(() => {
+            if(global.shop_slug){
+                router.push(`/${global.shop_slug}`);
+            }else{
+                router.push("/")
+            }
+        })
     }
     return (
         <>
@@ -22,7 +34,7 @@ const index = () => {
                     <div className="col-md-4 mb-3 ">
                         <div className="card text-center ">
                             <div className="card-body account-menu">
-                                <h5 className="card-title link"> <FaListAlt/> <Link  href="/my-account/orders"> My Orders</Link> </h5>
+                                <h5 className="card-title link"> <FaListAlt /> <Link href="/my-account/orders"> My Orders</Link> </h5>
                             </div>
                         </div>
                     </div>
@@ -30,7 +42,7 @@ const index = () => {
                     <div className="col-md-4 mb-3">
                         <div className="card text-center">
                             <div className="card-body account-menu">
-                                <h5 className="card-title link"> <FaUserAlt /><Link  href="/my-account/profile"> My Profile</Link></h5>
+                                <h5 className="card-title link"> <FaUserAlt /><Link href="/my-account/profile"> My Profile</Link></h5>
 
                             </div>
                         </div>
@@ -42,7 +54,7 @@ const index = () => {
                     <div className="col-md-4 mb-3">
                         <div className="card text-center">
                             <div className="card-body account-menu">
-                                <h5 className="card-title link"> <FaShoppingCart /> <Link  href="/cart"> My My Cart</Link></h5>
+                                <h5 className="card-title link"> <FaShoppingCart /> <Link href="/cart"> My Cart</Link></h5>
                             </div>
                         </div>
                     </div>
@@ -50,7 +62,7 @@ const index = () => {
                     <div className="col-md-4 mb-3">
                         <div className="card text-center">
                             <div className="card-body account-menu">
-                                <h5 className="card-title link"> <FaSignOutAlt /> Sign out</h5>
+                                <h5 className="card-title link" onClick={singOut} > <FaSignOutAlt /> Sign out</h5>
                             </div>
                         </div>
                     </div>
@@ -60,4 +72,17 @@ const index = () => {
     );
 };
 
-export default index;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        global: state.global,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        doLogOut: () => dispatch(doLogOut())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(index);

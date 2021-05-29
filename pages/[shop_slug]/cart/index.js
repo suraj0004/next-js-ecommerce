@@ -49,7 +49,11 @@ function Cart({ cart, global, fetchcart }) {
             {
               (cart.shop_info.loading || !cart.shop_info.data)
                 ? "Loading"
-                : <CheckoutDetails shop_info={cart.shop_info.data} cart={cart.data} />
+                : <CheckoutDetails 
+                    shop_info={cart.shop_info.data} 
+                    cart={cart.data} 
+                    isAuthenticated={global.isAuthenticated}
+                    />
             }
           </div>
         </div>

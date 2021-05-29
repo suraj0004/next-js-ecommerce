@@ -8,7 +8,7 @@ const login = ({show, onHide, doLogin, showRegister, syncCart}) => {
     const [form, setForm] = useState({
         phone : "",
         password : "",
-        remember : false
+        remember : true
     })
 
     const setPhone = (e) => {

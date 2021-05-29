@@ -3,6 +3,7 @@ import {
     STOP_LOADER,
     SET_AUTH_USER,
     SET_SHOP_SLUG,
+    UNSET_AUTH_USER,
 } from "./types"
 
 import { getCookie } from '~/services/cookie'
@@ -41,6 +42,14 @@ const reducer = (state = initialState, action) => {
             ...state,
             shop_slug : action.payload
         }
+        case UNSET_AUTH_USER:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: false,
+                token: null,
+                user: null,
+            }
         default:
             return state
     }

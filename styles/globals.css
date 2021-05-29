@@ -77,8 +77,13 @@ body{
 
 .link, a{
   color: black;
+  cursor: pointer;
 }
 .link:hover, a:hover{
   text-decoration: none;
   color: rgb(0, 86, 179);
+}
+
+.vertical-timeline::before {
+  background:black !important;
 }

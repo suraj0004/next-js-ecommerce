@@ -1,28 +1,15 @@
 import { useState } from 'react';
 import { FaRupeeSign } from "react-icons/fa";
 import CheckoutModal from "~/components/modals/Checkout"
-import ShopTiming from "~/components/cart/ShopTiming"
 import GrandTotal from "~/components/cart/GrandTotal"
-
+import ShopInfo from "~/components/common/ShopInfo"
 function CheckoutDetails({ shop_info, cart }) {
 
     const [checkoutModalShow, setCheckoutModal] = useState(false);
     let grand_total = 0;
     return (
         <>
-            <div className="img-responsive text-center mt-5">
-                <img src={shop_info.logo} height="150" width="150" className="img-fluid rounded-circle" />
-            </div>
-
-            <div className="text-center">
-                <h5>{shop_info.shop_name}</h5>
-                <p>{shop_info.address}</p>
-                <p> <a href={`tel:${shop_info.mobile}`}>+91-{shop_info.mobile}  </a> ({shop_info.seller_name}) </p>
-                <ShopTiming 
-                    from_time={shop_info.open_at} 
-                    to_time={shop_info.close_at} 
-                />
-            </div>
+            <ShopInfo shop_info={shop_info}  />
 
             <hr />
 

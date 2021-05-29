@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import {FaRupeeSign} from "react-icons/fa"
+import Link from 'next/link'
 
 const OrderItem = ({ order }) => {
 
@@ -19,9 +20,11 @@ const OrderItem = ({ order }) => {
         <div className="col-md-6 pb-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"> <img src={order.store.image} height="100" width="100" className="img-fluid rounded-circle mr-3" /> {order.store.name} </h5>
+                    <h5 class="card-title"> <img src={order.store.logo} height="100" width="100" className="img-fluid rounded-circle mr-3" /> {order.store.name} </h5>
                     <div className="pb-3">
-                    <a href="#" class="card-link"> <strong>Order</strong> #{order.order_no}</a>
+                    <Link href={`/my-account/orders/${order.order_no}`} class="card-link"> 
+                        <span className="link"><strong>Order</strong> #{order.order_no}</span>
+                    </Link>
                     <span class="float-right"> 
                     <Moment format="DD-MMMM-YYYY h:mm A">
                     {order.created_at}

@@ -42,3 +42,22 @@ export const fetchOrderDetail = (order_no) => {
             })
     }
 }
+
+export const cancelOrder = (order_no) => {
+    return (dispatch) => {
+
+        dispatch(orderDetailRequest())
+        authApi.post(`order/cancel`,{
+            order_no
+        })
+        .then(response => {
+                if (response.data.success) {
+                    dispatch(fetchOrderDetail(order_no))
+                } else {
+                    dispatch(orderDetailFailure(response.data.message))
+                }
+            }).catch(error => {
+                dispatch(orderDetailFailure(api_fail_error))
+            })
+    }
+}

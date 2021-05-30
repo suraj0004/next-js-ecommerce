@@ -9,10 +9,14 @@ import { connect } from 'react-redux';
 import { fetchcart } from '~/redux/index';
 import { errorNotification, successNotification } from "~/services/notification"
 import { api_fail_error } from "~/helpers/constant"
+import { useRouter } from 'next/router'
 
 
 
 const Checkout = ({ show, onHide, open_at, close_at, grand_total, global, fetchcart }) => {
+
+    const router = useRouter()
+
     const [selectedDate, handleDateChange] = useState(new Date());
     const [selectedFromTime, handleFromTimeChange] = useState(null);
     const [selectedToTime, handleToTimeChange] = useState(null);
@@ -63,6 +67,7 @@ const Checkout = ({ show, onHide, open_at, close_at, grand_total, global, fetchc
                 if (response.data.success) {
                     fetchcart();
                     successNotification(response.data.message)
+                    router.push(`/my-account/orders/${response.data.data.order_no}`)
                 } else {
                     errorNotification(response.data.message)
                 }

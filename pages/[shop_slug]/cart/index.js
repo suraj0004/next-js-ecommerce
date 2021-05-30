@@ -33,29 +33,36 @@ function Cart({ cart, global, fetchcart }) {
       </h3>
       <div className="pt-200">
         <div className="row">
-          <div className="col-lg-7 p-1 card">
-            {
-              (global.loading)
-                ? "Loading"
-                : <CartList cart={cart.data} />
-            }
-          </div>
+          {
+            (!cart.data.length)
+              ? <div className="col-12" > <h3 className="h3 text-center">Your Cart is empty </h3> </div>
+              : <>
+                <div className="col-lg-7 p-1 card">
+                  {
+                    (global.loading)
+                      ? "Loading"
+                      : <CartList cart={cart.data} />
+                  }
+                </div>
 
-          <div className="col-lg-1">
-            <br />
-          </div>
+                <div className="col-lg-1">
+                  <br />
+                </div>
 
-          <div className="col-lg-4 bg-white border">
-            {
-              (cart.shop_info.loading || !cart.shop_info.data)
-                ? "Loading"
-                : <CheckoutDetails 
-                    shop_info={cart.shop_info.data} 
-                    cart={cart.data} 
-                    isAuthenticated={global.isAuthenticated}
-                    />
-            }
-          </div>
+                <div className="col-lg-4 bg-white border">
+                  {
+                    (cart.shop_info.loading || !cart.shop_info.data)
+                      ? "Loading"
+                      : <CheckoutDetails
+                        shop_info={cart.shop_info.data}
+                        cart={cart.data}
+                        isAuthenticated={global.isAuthenticated}
+                      />
+                  }
+                </div>
+              </>
+          }
+
         </div>
       </div>
     </>

@@ -13,7 +13,7 @@ const OrderDetail = ({ data }) => {
                     <ShopInfo shop_info={data.store} />
                 </div>
                 <div className="col-md-6">
-                    <OrderTimeline status={data.status} />
+                    <OrderTimeline status={data.status} order_no={data.order_no} />
               </div>
             </div>
             <div className="row">
@@ -22,7 +22,11 @@ const OrderDetail = ({ data }) => {
                 </div>
                 <div className="col-md-8">
                     <hr/>
-                    <h4 className="text-center"> Total Items : {data.items.length} </h4>
+                    <h4 className="text-center border-bottom border-left border-right pb-4"> 
+                    Order No : #{data.order_no}
+                    <br/> 
+                    Total Items : {data.items.length}
+                    </h4>
                     {
                         data.items.map(item =>{
                             grand_total += (item.quantity * Number(item.price).toFixed(2) )
